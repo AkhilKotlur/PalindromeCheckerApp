@@ -1,28 +1,36 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Goal: Use stack to reverse characters and validate palindrome
-        String input = "racecar";
+        // Goal: Demonstrate FIFO vs LIFO using Queue and Stack
+        String input = "level";
 
-        // Stack – A linear data structure that follows the LIFO principle
+        // Queue – Follows First In First Out (FIFO) principle
+        Queue<Character> queue = new LinkedList<>();
+        // Stack – Follows Last In First Out (LIFO) principle
         Stack<Character> stack = new Stack<>();
 
-        // Push Operation – Used to insert characters into the stack
+        // Enqueue and Push characters
         for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+            char c = input.charAt(i);
+            queue.add(c);  // Enqueue operation
+            stack.push(c); // Push operation
         }
 
-        String reversed = "";
+        boolean isPalindrome = true;
 
-        // Pop Operation – Used to remove characters from the stack in reverse order
-        // Reversal Logic – Stack naturally reverses the order of elements
+        // Logical Comparison: Matching dequeue (queue) with pop (stack)
         while (!stack.isEmpty()) {
-            reversed += stack.pop();
+            // Dequeue (removes from front) vs Pop (removes from top/end)
+            if (!stack.pop().equals(queue.remove())) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        // Compare and print result
-        if (input.equals(reversed)) {
+        if (isPalindrome) {
             System.out.println(input + " is a palindrome.");
         } else {
             System.out.println(input + " is not a palindrome.");
