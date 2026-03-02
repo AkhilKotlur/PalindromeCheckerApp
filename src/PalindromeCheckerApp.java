@@ -1,66 +1,32 @@
-import java.util.*;
+public class PalindromeCheckerApp {
+    public static void main(String[] args) {
+        String input = "A man a plan a canal Panama".replaceAll("\\s+", "").toLowerCase();
 
-// 1. Define PalindromeStrategy interface
-interface PalindromeStrategy {
-    boolean check(String text);
-}
+        // 1. Measure Performance of Two-Pointer Approach
+        long start1 = System.nanoTime(); // Key Concept: System.nanoTime()
+        isPalindromeTwoPointer(input);
+        long end1 = System.nanoTime();
+        System.out.println("Two-Pointer Approach Time: " + (end1 - start1) + " ns");
 
-// 2. Implement StackStrategy
-class StackStrategy implements PalindromeStrategy {
-    @Override
-    public boolean check(String text) {
-        String clean = text.replaceAll("\\s+", "").toLowerCase();
-        Stack<Character> stack = new Stack<>();
-        for (char c : clean.toCharArray()) stack.push(c);
+        // 2. Measure Performance of String Reversal Approach
+        long start2 = System.nanoTime();
+        isPalindromeReversal(input);
+        long end2 = System.nanoTime();
+        System.out.println("String Reversal Approach Time: " + (end2 - start2) + " ns");
 
-        StringBuilder reversed = new StringBuilder();
-        while (!stack.isEmpty()) reversed.append(stack.pop());
-
-        return clean.equals(reversed.toString());
+        // Algorithm comparison
     }
-}
 
-// 2. Implement DequeStrategy
-class DequeStrategy implements PalindromeStrategy {
-    @Override
-    public boolean check(String text) {
-        String clean = text.replaceAll("\\s+", "").toLowerCase();
-        Deque<Character> deque = new LinkedList<>();
-        for (char c : clean.toCharArray()) deque.addLast(c);
-
-        while (deque.size() > 1) {
-            if (!deque.removeFirst().equals(deque.removeLast())) {
-                return false;
-            }
+    public static boolean isPalindromeTwoPointer(String text) {
+        int start = 0, end = text.length() - 1;
+        while (start < end) {
+            if (text.charAt(start++) != text.charAt(end--)) return false;
         }
         return true;
     }
-}
 
-// Context class to inject strategy at runtime
-class PalindromeChecker {
-    private PalindromeStrategy strategy;
-
-    public void setStrategy(PalindromeStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public boolean validate(String text) {
-        return strategy.check(text);
-    }
-}
-
-public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        PalindromeChecker checker = new PalindromeChecker();
-        String input = "Racecar";
-
-        // Inject StackStrategy at runtime
-        checker.setStrategy(new StackStrategy());
-        System.out.println("Using Stack: " + checker.validate(input));
-
-        // Inject DequeStrategy at runtime
-        checker.setStrategy(new DequeStrategy());
-        System.out.println("Using Deque: " + checker.validate(input));
+    public static boolean isPalindromeReversal(String text) {
+        String reversed = new StringBuilder(text).reverse().toString();
+        return text.equals(reversed);
     }
 }
