@@ -1,21 +1,31 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Goal: Check whether a string is a palindrome by reversing it
+        // Goal: Convert string to character array and compare characters
+        String input = "deified";
 
-        String original = "radar";
-        String reversed = "";
+        // Character Array (char[]) – Used to store individual characters for index-based access
+        char[] charArray = input.toCharArray();
 
-        // Loop (for loop) – Used to iterate through the characters of the string in reverse order
-        // String Concatenation (+) – Used to build the reversed string character by character
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed += original.charAt(i);
+        // Two-Pointer Technique – One pointer at the start, one at the end
+        int start = 0;
+        int end = charArray.length - 1;
+        boolean isPalindrome = true;
+
+        // Compare start & end characters
+        while (start < end) {
+            // Array Indexing – Accessing elements using index positions
+            if (charArray[start] != charArray[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
 
-        // equals() Method – Used to compare the actual content of two String objects
-        if (original.equals(reversed)) {
-            System.out.println(original + " is a palindrome.");
+        if (isPalindrome) {
+            System.out.println(input + " is a palindrome.");
         } else {
-            System.out.println(original + " is not a palindrome.");
+            System.out.println(input + " is not a palindrome.");
         }
     }
 }
