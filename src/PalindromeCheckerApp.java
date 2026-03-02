@@ -1,28 +1,28 @@
+import java.util.Stack;
+
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Goal: Convert string to character array and compare characters
-        String input = "deified";
+        // Goal: Use stack to reverse characters and validate palindrome
+        String input = "racecar";
 
-        // Character Array (char[]) – Used to store individual characters for index-based access
-        char[] charArray = input.toCharArray();
+        // Stack – A linear data structure that follows the LIFO principle
+        Stack<Character> stack = new Stack<>();
 
-        // Two-Pointer Technique – One pointer at the start, one at the end
-        int start = 0;
-        int end = charArray.length - 1;
-        boolean isPalindrome = true;
-
-        // Compare start & end characters
-        while (start < end) {
-            // Array Indexing – Accessing elements using index positions
-            if (charArray[start] != charArray[end]) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // Push Operation – Used to insert characters into the stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
         }
 
-        if (isPalindrome) {
+        String reversed = "";
+
+        // Pop Operation – Used to remove characters from the stack in reverse order
+        // Reversal Logic – Stack naturally reverses the order of elements
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
+
+        // Compare and print result
+        if (input.equals(reversed)) {
             System.out.println(input + " is a palindrome.");
         } else {
             System.out.println(input + " is not a palindrome.");
