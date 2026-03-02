@@ -1,14 +1,20 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Goal: Display a welcome message and app details at startup
+        // Goal: Display whether a hardcoded string is a palindrome
 
-        // Application name is displayed
-        System.out.println("Welcome to the Palindrome Checker App");
+        // Hardcoded string literal stored in a String variable
+        String word = "madam";
+        String reversedWord = "madam"; // Hardcoded result for this UC
 
-        // Application version is displayed
-        System.out.println("Version: 1.0");
+        // Flow: Program starts and hardcoded string is checked
+        // Conditional Statement (if-else) used to evaluate the condition
+        if (word.equals(reversedWord)) {
+            // Console Output: System.out.println() used to display the result
+            System.out.println(word + " is a palindrome.");
+        } else {
+            System.out.println(word + " is not a palindrome.");
+        }
 
-        // Program continues to next use case or exits
-        System.out.println("Application initialized successfully.");
+        // Program exits
     }
 }
