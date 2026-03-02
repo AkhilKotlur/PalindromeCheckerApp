@@ -1,20 +1,21 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Goal: Display whether a hardcoded string is a palindrome
+        // Goal: Check whether a string is a palindrome by reversing it
 
-        // Hardcoded string literal stored in a String variable
-        String word = "madam";
-        String reversedWord = "madam"; // Hardcoded result for this UC
+        String original = "radar";
+        String reversed = "";
 
-        // Flow: Program starts and hardcoded string is checked
-        // Conditional Statement (if-else) used to evaluate the condition
-        if (word.equals(reversedWord)) {
-            // Console Output: System.out.println() used to display the result
-            System.out.println(word + " is a palindrome.");
-        } else {
-            System.out.println(word + " is not a palindrome.");
+        // Loop (for loop) – Used to iterate through the characters of the string in reverse order
+        // String Concatenation (+) – Used to build the reversed string character by character
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed += original.charAt(i);
         }
 
-        // Program exits
+        // equals() Method – Used to compare the actual content of two String objects
+        if (original.equals(reversed)) {
+            System.out.println(original + " is a palindrome.");
+        } else {
+            System.out.println(original + " is not a palindrome.");
+        }
     }
 }
